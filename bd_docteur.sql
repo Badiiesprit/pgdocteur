@@ -1,11 +1,12 @@
+
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 27 mai 2022 à 12:47
--- Version du serveur : 10.4.22-MariaDB
--- Version de PHP : 7.3.33
+-- Généré le : ven. 13 mai 2022 à 04:52
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +19,26 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `bd_mymedecin`
+-- Base de données : `evenement`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `description` text NOT NULL,
+  `date_deb` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `nb_participant` int(11) NOT NULL,
+  `id_specialite` int(11) NOT NULL,
+  `id_gouvernerat` int(11) NOT NULL,
+  `type_participant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -62,6 +81,18 @@ INSERT INTO `gouvernorats` (`id`, `name`) VALUES
 (23, 'Tozeur'),
 (24, 'Tunis'),
 (25, 'Zaghouan');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `inscription_events`
+--
+
+CREATE TABLE `inscription_events` (
+  `id` int(11) NOT NULL,
+  `id_events` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -171,10 +202,24 @@ CREATE TABLE `user` (
 --
 
 --
+-- Index pour la table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `gouvernorats`
 --
 ALTER TABLE `gouvernorats`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `inscription_events`
+--
+ALTER TABLE `inscription_events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_inscription_events_user` (`id_user`),
+  ADD KEY `FK_inscription_events` (`id_events`);
 
 --
 -- Index pour la table `medecines`
@@ -216,10 +261,22 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `gouvernorats`
 --
 ALTER TABLE `gouvernorats`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT pour la table `inscription_events`
+--
+ALTER TABLE `inscription_events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `medecines`
@@ -250,6 +307,13 @@ ALTER TABLE `user`
 --
 
 --
+-- Contraintes pour la table `inscription_events`
+--
+ALTER TABLE `inscription_events`
+  ADD CONSTRAINT `FK_inscription_events` FOREIGN KEY (`id_events`) REFERENCES `events` (`id`),
+  ADD CONSTRAINT `FK_inscription_events_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+
+--
 -- Contraintes pour la table `medecines`
 --
 ALTER TABLE `medecines`
@@ -274,3 +338,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
