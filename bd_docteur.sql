@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 27 mai 2022 à 12:47
--- Version du serveur : 10.4.22-MariaDB
--- Version de PHP : 7.3.33
+-- Généré le : jeu. 16 juin 2022 à 00:54
+-- Version du serveur :  10.4.11-MariaDB
+-- Version de PHP : 7.2.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,24 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bd_mymedecin`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `name` varchar(250) NOT NULL,
+  `description` text NOT NULL,
+  `date_deb` date NOT NULL,
+  `date_fin` date NOT NULL,
+  `nb_participant` int(11) NOT NULL,
+  `id_specialite` int(11) NOT NULL,
+  `id_gouvernerat` int(11) NOT NULL,
+  `type_participant` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -66,6 +84,18 @@ INSERT INTO `gouvernorats` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `inscription_events`
+--
+
+CREATE TABLE `inscription_events` (
+  `id` int(11) NOT NULL,
+  `id_events` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `medecines`
 --
 
@@ -80,6 +110,14 @@ CREATE TABLE `medecines` (
   `gallery_cabinet` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `medecines`
+--
+
+INSERT INTO `medecines` (`id`, `id_user`, `adresse_cabinet`, `phone_fixe_cabinet`, `phone_fixe2_cabinet`, `id_specialite`, `id_gouvernorat`, `gallery_cabinet`) VALUES
+(2, 50, 'test ccc', '72584951', '72698542', 5, 5, '-'),
+(4, 52, 'azsssq', '72852852', '72741852', 4, 3, '-');
+
 -- --------------------------------------------------------
 
 --
@@ -90,6 +128,16 @@ CREATE TABLE `patient` (
   `id` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `patient`
+--
+
+INSERT INTO `patient` (`id`, `id_user`) VALUES
+(3, 42),
+(4, 43),
+(5, 44),
+(11, 46);
 
 -- --------------------------------------------------------
 
@@ -167,14 +215,40 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `nom`, `prenom`, `photo_profil`, `adresse`, `phone`, `role`, `password`, `login`) VALUES
+(42, 'admin', 'admin', '-', 'admin', 'admin', 1, 'admin', 'admin'),
+(43, 'admin', 'admin', '-', 'admin', 'admin', 1, 'admin', 'admin'),
+(44, 'admin', 'admin', '-', 'admin', 'admin', 1, 'admin', 'admin'),
+(46, 'admin', 'admin', '-', 'admin', 'admin', 1, 'admin', 'admin'),
+(50, 'badi', 'abdelkhalak', '-', 'test', '8571254', 2, '123456', 'badim@gmail.com'),
+(52, 'aaaa', 'sssss', '-', 'zzzz', '74852852', 2, '123456', 'badim0@gmail.com');
+
+--
 -- Index pour les tables déchargées
 --
+
+--
+-- Index pour la table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `gouvernorats`
 --
 ALTER TABLE `gouvernorats`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `inscription_events`
+--
+ALTER TABLE `inscription_events`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FK_inscription_events_user` (`id_user`),
+  ADD KEY `FK_inscription_events` (`id_events`);
 
 --
 -- Index pour la table `medecines`
@@ -189,6 +263,7 @@ ALTER TABLE `medecines`
 -- Index pour la table `patient`
 --
 ALTER TABLE `patient`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `FK_patient` (`id_user`);
 
 --
@@ -216,16 +291,34 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT pour la table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `gouvernorats`
 --
 ALTER TABLE `gouvernorats`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT pour la table `inscription_events`
+--
+ALTER TABLE `inscription_events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `medecines`
 --
 ALTER TABLE `medecines`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `patient`
+--
+ALTER TABLE `patient`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `pharmacie`
@@ -243,11 +336,18 @@ ALTER TABLE `specialites`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `inscription_events`
+--
+ALTER TABLE `inscription_events`
+  ADD CONSTRAINT `FK_inscription_events` FOREIGN KEY (`id_events`) REFERENCES `events` (`id`),
+  ADD CONSTRAINT `FK_inscription_events_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
 
 --
 -- Contraintes pour la table `medecines`
