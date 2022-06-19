@@ -87,19 +87,19 @@
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <ImageView fitHeight="52.0" fitWidth="64.0" onKeyPressed="#keyPressedMedecin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                              <ImageView fitHeight="52.0" fitWidth="64.0" onMouseClicked="#keyPressedMedecin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                                  <image>
-                                    <Image url="@../../images/first-aid-kit.png" />
+                                    <Image url="@../images/first-aid-kit.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="45.0" fitWidth="63.0" onKeyPressed="#keyPressedPharmacien" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                              <ImageView fitHeight="45.0" fitWidth="63.0" onMouseClicked="#keyPressedPharmacien" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                                  <image>
-                                    <Image url="@../../images/caduceus-symbol.png" />
+                                    <Image url="@../images/caduceus-symbol.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="59.0" fitWidth="153.0" nodeOrientation="RIGHT_TO_LEFT" onKeyPressed="#keyPressedPatient" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="59.0" fitWidth="153.0" nodeOrientation="RIGHT_TO_LEFT" onMouseClicked="#keyPressedPatient" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../images/user.png" />
+                                    <Image url="@../images/user.png" />
                                  </image>
                               </ImageView>
                            </children>

@@ -41,7 +41,7 @@ public class LoginService {
         
         try {
             ste = cnx.createStatement();
-            String sql = "SELECT * FROM user WHERE login ='"+login+"' AND password = '"+password+"'";
+            String sql = "SELECT * FROM user WHERE statu=1 AND login ='"+login+"' AND password = '"+password+"'";
             rs = ste.executeQuery(sql);
             while(rs.next()){
                 LoginService.setUserConnected(rs.getInt(1));
@@ -51,6 +51,24 @@ public class LoginService {
             return 0;
         } catch (Exception e) {
             LoginService.setUserConnected(0);
+            return 0;
+        }
+        
+    }
+     public int validLoginAdmin(String login,String password) throws SQLException{
+        
+        try {
+            ste = cnx.createStatement();
+            String sql = "SELECT * FROM user WHERE statu=1 AND role=10 AND login ='"+login+"' AND password = '"+password+"'";
+            rs = ste.executeQuery(sql);
+            while(rs.next()){
+                LoginService.setUserConnected(rs.getInt(1));
+                return rs.getInt(1);
+            }
+            //LoginService.setUserConnected(0);
+            return 0;
+        } catch (Exception e) {
+            //LoginService.setUserConnected(0);
             return 0;
         }
         

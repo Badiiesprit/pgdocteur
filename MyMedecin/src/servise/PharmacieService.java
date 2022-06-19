@@ -5,6 +5,7 @@
  */
 package servise;
 import entite.Pharmacie;
+import entite.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -56,7 +57,16 @@ public class PharmacieService implements IService<Pharmacie>{
 
     @Override
     public void update(Pharmacie t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String requete = "update pharmacie set adresse_pharmacie='"+t.getAdresse_pharmacie()+"',phone_fixe_pharmacie='"+t.getPhone_fixe_pharmacie()+"',phone_fixe2_pharmacie='"+t.getPhone_fixe2_pharmacie()+"',id_gouvernorat="+t.getId_gouvernorat()+",name_pharmacie='"+t.getName_pharmacie()+"' where id_user="+t.getId_user();
+
+        try {
+            System.out.println(requete);
+            ste=cnx.createStatement();
+            ste.executeUpdate(requete);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -67,6 +77,29 @@ public class PharmacieService implements IService<Pharmacie>{
     @Override
     public Pharmacie getById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public Pharmacie getByUser(int id) {
+        String requete="select * from pharmacie where id_user="+id;
+        try {
+            ste=cnx.createStatement();
+            rs=ste.executeQuery(requete);
+            while(rs.next()){
+                return new Pharmacie(
+                    rs.getInt("id"), 
+                    rs.getInt("id_user"),
+                    rs.getString("adresse_pharmacie"),
+                    rs.getString("phone_fixe_pharmacie"),
+                    rs.getString("phone_fixe2_pharmacie"),
+                    rs.getString("name_pharmacie"), 
+                    rs.getString("gallery_pharmacie"),
+                    rs.getInt("id_gouvernorat")
+                );
+            }
+            return new Pharmacie();
+        } catch (SQLException ex) {
+            return new Pharmacie();
+        }
     }
     
 }

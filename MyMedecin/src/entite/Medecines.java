@@ -29,6 +29,9 @@ public class Medecines {
         this.id_gouvernorat = id_gouvernorat;
         this.gallery_cabinet = gallery_cabinet;
     }
+
+    public Medecines() {
+    }
     public Medecines(int id_user,String adresse_cabinet,String phone_fixe_cabinet,String phone_fixe2_cabinet,int id_specialite,int id_gouvernorat,String gallery_cabinet){
         this.id_user = id_user;
         this.adresse_cabinet = adresse_cabinet;
@@ -38,6 +41,7 @@ public class Medecines {
         this.id_gouvernorat = id_gouvernorat;
         this.gallery_cabinet = gallery_cabinet;
     }
+    
     public int getId() {
         return id;
     }

@@ -46,9 +46,17 @@ public class LoginFXMLController implements Initializable {
             int user_id = ls.validLogin(login.getText(), pass.getText());
             System.out.println("user_id"+user_id);
             if(user_id!=0){
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeFXML.fxml"));
-                Parent root = loader.load();
-                login.getScene().setRoot(root);
+                user_id = ls.validLoginAdmin(login.getText(), pass.getText());
+                if(user_id!=0){
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminFXML.fxml"));
+                    Parent root = loader.load();
+                    login.getScene().setRoot(root);
+                }else{
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeFXML.fxml"));
+                    Parent root = loader.load();
+                    login.getScene().setRoot(root);  
+                }
+                
             }else{
                 System.out.println("non connecte");
             }  

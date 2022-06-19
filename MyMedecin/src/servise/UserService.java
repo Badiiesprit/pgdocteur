@@ -87,6 +87,7 @@ public class UserService implements IService<User>{
 
     @Override
     public void delete(User t) {
+        
         String req="delete from user where id="+t.getId();
         try {
             ste=cnx.createStatement();
@@ -99,27 +100,42 @@ public class UserService implements IService<User>{
 
     @Override
     public void update(User t) {
+        String requete = "update user set nom='"+t.getNom()+"',prenom='"+t.getPrenom()+"',adresse='"+t.getAdresse()+"',phone='"+t.getPhone()+"',login='"+t.getLogin()+"'   where id="+t.getId();
+        if(t.getPassword().length()>0){
+            requete = "update user set nom='"+t.getNom()+"',prenom='"+t.getPrenom()+"',adresse='"+t.getAdresse()+"',phone='"+t.getPhone()+"',password='"+t.getPassword()+"',login='"+t.getLogin()+"'   where id="+t.getId();
+        }
+        try {
+            ste=cnx.createStatement();
+            ste.executeUpdate(requete);
 
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
     public ArrayList<User> getAll() {
         ArrayList<User> list=new ArrayList<>();
-        String requete="select * from user";
+        String requete="select * from user order by id desc";
         try {
             ste=cnx.createStatement();
            rs=ste.executeQuery(requete);
            while(rs.next()){
+              
+             
+
+                       
                list.add(new User(
-                       rs.getInt(1), 
-                       rs.getString(2),
-                       rs.getString(3), 
-                       rs.getString(4), 
-                       rs.getString(5), 
-                       rs.getString(6), 
-                       rs.getString(7),
-                       rs.getString(8),
-                       rs.getInt(9)
+                       rs.getInt("id"), 
+                       rs.getString("nom"),
+                       rs.getString("prenom"),
+                       rs.getString("login"),
+                       rs.getString("password"),
+                       rs.getString("phone"),
+                       rs.getString("adresse"), 
+                       rs.getString("photo_profil"), 
+                       rs.getInt("role"),
+                       rs.getInt("statu")
                ));
            }
         } catch (SQLException ex) {
@@ -144,7 +160,8 @@ public class UserService implements IService<User>{
                     rs.getString("phone"), 
                     rs.getString("adresse"),
                     rs.getString("photo_profil"),
-                    rs.getInt("role")
+                    rs.getInt("role"),
+                    rs.getInt("statu")
                 );
             }
             return new User();
@@ -163,5 +180,21 @@ public class UserService implements IService<User>{
         }
         return size;
     }
+    
+    public void setStatuUser( int statu , int id ) throws SQLException{
+        String req="update user set statu=0 where id="+id;
+        if(statu == 0){
+            req="update user set statu=1 where id="+id;
+        }
+        
+        try {
+            ste=cnx.createStatement();
+            ste.executeUpdate(req);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }

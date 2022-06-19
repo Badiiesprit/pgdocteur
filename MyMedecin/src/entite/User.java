@@ -21,7 +21,7 @@ public class User {
     private int role;
     private String password;
     private String login;
-
+    private int statu;
 
     public User(String nom,String prenom,String login,String password,String phone,String adresse,String photo_profil,int role) {
         this.nom = nom;
@@ -32,7 +32,7 @@ public class User {
         this.adresse = adresse;
         this.photo_profil =photo_profil;
         this.role = role;
-        
+        this.statu =0;
     }
     public User() {
         this.id = 0;
@@ -44,9 +44,9 @@ public class User {
         this.adresse = "";
         this.photo_profil ="";
         this.role = 0;
-        
+        this.statu =0;
     }
-    public User(int id,String nom,String prenom,String login,String password,String phone,String adresse,String photo_profil,int role) {
+    public User(int id,String nom,String prenom,String login,String password,String phone,String adresse,String photo_profil,int role,int statu) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -56,7 +56,7 @@ public class User {
         this.adresse = adresse;
         this.photo_profil =photo_profil;
         this.role = role;
-       
+        this.statu = statu;
     }
     public int getId() {
         return id;
@@ -124,6 +124,14 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public int getStatu() {
+        return statu;
+    }
+
+    public void setStatu(int statu) {
+        this.statu = statu;
     }
 
     

@@ -29,6 +29,27 @@ public class Pharmacie {
         this.id_gouvernorat = id_gouvernorat;
     }
 
+    public Pharmacie(int id, int id_user, String adresse_pharmacie, String phone_fixe_pharmacie, String phone_fixe2_pharmacie, String name_pharmacie, String gallery_pharmacie, int id_gouvernorat) {
+        this.id = id;
+        this.id_user = id_user;
+        this.adresse_pharmacie = adresse_pharmacie;
+        this.phone_fixe_pharmacie = phone_fixe_pharmacie;
+        this.phone_fixe2_pharmacie = phone_fixe2_pharmacie;
+        this.name_pharmacie = name_pharmacie;
+        this.gallery_pharmacie = gallery_pharmacie;
+        this.id_gouvernorat = id_gouvernorat;
+    }
+
+    public Pharmacie() {
+        this.id = 0;
+        this.id_user = 0;
+        this.adresse_pharmacie = "";
+        this.phone_fixe_pharmacie = "";
+        this.phone_fixe2_pharmacie = "";
+        this.name_pharmacie = "";
+        this.gallery_pharmacie = "";
+        this.id_gouvernorat = 0;    }
+
     public int getId() {
         return id;
     }
@@ -88,4 +109,10 @@ public class Pharmacie {
     public void setId_gouvernorat(int id_gouvernorat) {
         this.id_gouvernorat = id_gouvernorat;
     }
+
+    @Override
+    public String toString() {
+        return "Pharmacie{" + "id=" + id + ", id_user=" + id_user + ", adresse_pharmacie=" + adresse_pharmacie + ", phone_fixe_pharmacie=" + phone_fixe_pharmacie + ", phone_fixe2_pharmacie=" + phone_fixe2_pharmacie + ", name_pharmacie=" + name_pharmacie + ", gallery_pharmacie=" + gallery_pharmacie + ", id_gouvernorat=" + id_gouvernorat + '}';
+    }
+    
 }

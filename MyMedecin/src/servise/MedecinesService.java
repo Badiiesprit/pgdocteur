@@ -48,7 +48,6 @@ public class MedecinesService implements IService<Medecines>{
         } catch (SQLException ex) {
             Logger.getLogger(MedecinesService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -66,7 +65,14 @@ public class MedecinesService implements IService<Medecines>{
 
     @Override
     public void update(Medecines t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String requete = "UPDATE medecines set adresse_cabinet='"+t.getAdresse_cabinet()+"',phone_fixe_cabinet='"+t.getPhone_fixe_cabinet()+"',phone_fixe2_cabinet='"+t.getPhone_fixe2_cabinet()+"',id_gouvernorat="+t.getId_gouvernorat()+",id_specialite="+t.getId_specialite()+" where id_user="+t.getId_user();
+        try {
+            System.out.println(requete);
+            ste=cnx.createStatement();
+            ste.executeUpdate(requete);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -96,6 +102,28 @@ public class MedecinesService implements IService<Medecines>{
     @Override
     public Medecines getById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    public Medecines getByUser(int id) {
+        String requete="select * from medecines where id_user="+id;
+        try {
+            ste=cnx.createStatement();
+            rs=ste.executeQuery(requete);
+            while(rs.next()){
+                return new Medecines(
+                    rs.getInt("id"), 
+                    rs.getInt("id_user"), 
+                    rs.getString("adresse_cabinet"),
+                    rs.getString("phone_fixe_cabinet"),
+                    rs.getString("phone_fixe2_cabinet"),
+                    rs.getInt("id_specialite"), 
+                    rs.getInt("id_gouvernorat"),
+                    rs.getString("gallery_cabinet")
+                );
+            }
+            return new Medecines();
+        } catch (SQLException ex) {
+            return new Medecines();
+        }
     }
     
 }

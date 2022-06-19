@@ -71,8 +71,17 @@ public class HomeFXMLController implements Initializable {
     }
 
     @FXML
-    private void updateUser(ActionEvent event) {
-        
+    private void updateUser(ActionEvent event) throws IOException {
+        UserService us = new UserService();
+        int role =us.getById(LoginService.getUserConnected()).getRole();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("profiPatient.fxml"));
+        if(role==2){
+            loader = new FXMLLoader(getClass().getResource("ProfilMedecin.fxml"));
+        }else if(role==3){
+            loader = new FXMLLoader(getClass().getResource("ProfilPharmacie.fxml"));
+        }
+        Parent root = loader.load();
+        content.getScene().setRoot(root);
     }
     
 }
