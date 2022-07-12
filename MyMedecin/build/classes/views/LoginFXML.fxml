@@ -14,23 +14,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginFXMLController">
    <children>
-      <TabPane layoutX="1.0" layoutY="56.0" prefHeight="344.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="521.0" layoutY="-1.0" prefHeight="600.0" prefWidth="279.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Connexion">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="275.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="360.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="-1.0" layoutY="20.0" prefHeight="35.0" prefWidth="601.0" text="Connexion">
+                        <Label alignment="CENTER" layoutX="39.0" layoutY="98.0" prefHeight="35.0" prefWidth="202.0" text="Connexion">
                            <font>
                               <Font name="System Bold Italic" size="24.0" />
                            </font>
                         </Label>
-                        <GridPane layoutX="122.0" layoutY="113.0" prefHeight="90.0" prefWidth="356.0">
+                        <GridPane layoutX="9.0" layoutY="190.0" prefHeight="191.0" prefWidth="261.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="91.0" />
-                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="265.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="89.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="143.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -48,9 +48,9 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="login" GridPane.columnIndex="1" />
-                              <PasswordField fx:id="pass" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" onAction="#clickLogin" text="Connexion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="login" styleClass="imput" stylesheets="@../style/style.css" GridPane.columnIndex="1" />
+                              <PasswordField fx:id="pass" styleClass="imput" stylesheets="@../style/style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#clickLogin" styleClass="btn" stylesheets="@../style/style.css" text="Connexion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -61,38 +61,40 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane alignment="CENTER" layoutX="26.0" layoutY="96.0" prefHeight="124.0" prefWidth="548.0">
+                        <GridPane alignment="CENTER" prefHeight="573.0" prefWidth="279.0">
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="267.0" minWidth="10.0" prefWidth="196.0" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button mnemonicParsing="false" onAction="#clickPatient" text="Tu est Patient?" GridPane.rowIndex="1">
+                              <Button mnemonicParsing="false" onAction="#clickPatient" styleClass="btn" stylesheets="@../style/style.css" text="Tu est Patient?" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#clickMedecin" text="Tu est Médecin?" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button mnemonicParsing="false" onAction="#clickMedecin" styleClass="btn" stylesheets="@../style/style.css" text="Tu est Médecin?" GridPane.rowIndex="3">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#clickPharmacien" text="Tu est Pharmacien?" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Button mnemonicParsing="false" onAction="#clickPharmacien" styleClass="btn" stylesheets="@../style/style.css" text="Tu est Pharmacien?" GridPane.rowIndex="5">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </Button>
-                              <ImageView fitHeight="52.0" fitWidth="64.0" onMouseClicked="#keyPressedMedecin" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                              <ImageView fitHeight="52.0" fitWidth="64.0" onMouseClicked="#keyPressedMedecin" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                                  <image>
                                     <Image url="@../images/first-aid-kit.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="45.0" fitWidth="63.0" onMouseClicked="#keyPressedPharmacien" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                              <ImageView fitHeight="45.0" fitWidth="63.0" onMouseClicked="#keyPressedPharmacien" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
                                  <image>
                                     <Image url="@../images/caduceus-symbol.png" />
                                  </image>
@@ -110,10 +112,5 @@
           </Tab>
         </tabs>
       </TabPane>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="35.0" prefWidth="601.0" text="My Medecin" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
    </children>
 </AnchorPane>

@@ -51,7 +51,11 @@ public class HomeFXMLController implements Initializable {
     }
 
     @FXML
-    private void event(ActionEvent event) {
+    private void event(ActionEvent event) throws IOException {
+        LoginService.setUserConnected(0);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EventFXML.fxml"));
+        Parent root = loader.load();
+        content.getScene().setRoot(root);
     }
 
     @FXML

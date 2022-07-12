@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView fx:id="table_event" layoutY="40.0" prefHeight="360.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="25.0" text="#ID" />
+          <TableColumn fx:id="event" prefWidth="42.0" text="Event" />
+            <TableColumn fx:id="description" prefWidth="69.0" text="description" />
+            <TableColumn fx:id="date_deb" prefWidth="59.0" text="date_deb" />
+            <TableColumn fx:id="date_fin" prefWidth="67.0" text="date_fin" />
+            <TableColumn fx:id="specialite" prefWidth="76.0" text="specialite" />
+            <TableColumn fx:id="gouvernerat" prefWidth="82.0" text="gouvernorat" />
+            <TableColumn fx:id="participant" prefWidth="98.0" text="particpant" />
+            <TableColumn fx:id="delete" prefWidth="81.0" text="delete" />
+        </columns>
+      </TableView>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="26.0" layoutY="-3.0" prefHeight="44.0" prefWidth="549.0" text="Events">
+         <font>
+            <Font name="System Bold Italic" size="24.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

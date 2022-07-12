@@ -1,0 +1,17 @@
+.btn{
+   -fx-border: none;
+   -fx-padding: 10px;
+   -fx-margin: 5px;
+   -fx-background-color: blue;
+   -fx-border-right: 0px;
+   -fx-color: #ffffff;
+}
+.imput{
+    -fx-border: none;
+    -fx-border-bottom: solid 1px #0000ff;
+    -fx-padding: 10px;
+    -fx-margin: 5px;
+    -fx-background-color: blue;
+    -fx-border-right: 0px;
+    -fx-color: #ffffff;
+}
