@@ -15,6 +15,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +31,7 @@ import servise.GouvernoratSpecialiteServise;
 import servise.MedecinesService;
 import servise.PatientService;
 import servise.UserService;
+import utils.ControleSaisie;
 
 /**
  * FXML Controller class
@@ -59,6 +62,8 @@ public class MedecinesFXMLController implements Initializable {
     private ComboBox<Gouvernorat> gouvernorat;
     @FXML
     private TextField phone_fixe2_cabinet;
+    @FXML
+    private Label error;
 
     /**
      * Initializes the controller class.
@@ -80,11 +85,72 @@ public class MedecinesFXMLController implements Initializable {
             ObservableList<Specialite> obs=FXCollections.observableArrayList(list);
             specialite.setItems(obs);
         }
+        configPhone(phone);
+        configPhone(phone_fixe_cabinet);
+        configPhone(phone_fixe2_cabinet);
+    }
+    private void configPhone(TextField phone){
+        phone.textProperty().addListener(new ChangeListener<String>(){
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    phone.setText(newValue.replaceAll("[^\\d]", ""));
+                } 
+                if (phone.getText().length() > 8) {
+                    String s = phone.getText().substring(0, 8);
+                    phone.setText(s);
+                }
+            }
+            
+        });
     }
     @FXML
     private void inscription(ActionEvent event) throws IOException {
+         ControleSaisie cs = new ControleSaisie();
+        if(!cs.valideText(nom.getText(), 4)){
+            javax.swing.JOptionPane.showMessageDialog(null,"le nom est obligatoire avec une longueur minimale de 4");
+            
+            return;
+        }
+        if(!cs.valideText(prenom.getText(), 4)){
+            javax.swing.JOptionPane.showMessageDialog(null,"le prenom est obligatoire avec une longueur minimale de 4");
+            return;
+        }
+        if(!cs.valideText(adresse.getText(), 10)){
+            javax.swing.JOptionPane.showMessageDialog(null,"le adresse est obligatoire avec une longueur minimale de 10");
+            return;
+        }
+        if(!cs.validePhone(phone.getText())){
+            javax.swing.JOptionPane.showMessageDialog(null,"le phone est obligatoire avec une longueur 8");
+            return;
+        }
+        if(!cs.valideLogin(login.getText())){
+            javax.swing.JOptionPane.showMessageDialog(null,"le login est obligatoire 'aaaa@bbbb.ccc'");
+            return;
+        }
+        if(!cs.validePassword(pass.getText())){
+            javax.swing.JOptionPane.showMessageDialog(null,"le Password est obligatoire avec une longueur minimale de 4");
+            return;
+        }
+        if(!cs.valideText(adresse_cabinet.getText(), 10)){
+            javax.swing.JOptionPane.showMessageDialog(null,"le adresse cabinet est obligatoire avec une longueur minimale de 10");
+            return;
+        }
+        if(!cs.validePhone(phone_fixe_cabinet.getText())){
+            javax.swing.JOptionPane.showMessageDialog(null,"le fixe est obligatoire avec une longueur 8");
+            return;
+        }
+        if(specialite.getValue() == null){
+            javax.swing.JOptionPane.showMessageDialog(null,"la specialite est obligatoire");
+            return;
+        }
+        if(gouvernorat.getValue() == null){
+            javax.swing.JOptionPane.showMessageDialog(null,"la gouvernorat est obligatoire");
+            return;
+        }
+        error.setText("");
         MedecinesService ms = new MedecinesService();
-        specialite.getValue().getId();
+        
         UserService us = new UserService();
         User u = new User(nom.getText(), prenom.getText(), login.getText(), pass.getText(), phone.getText(), adresse.getText(), "-", 2);
         int user_id = us.preInsert(u);

@@ -5,8 +5,10 @@
  */
 package servise;
 
+import entite.Creneau;
 import entite.Gouvernorat;
 import entite.Specialite;
+import entite.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -63,4 +65,43 @@ public class GouvernoratSpecialiteServise {
         }
         return list;
     } 
+    /////////////////////////////////Amine CHEMSI//////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////
+    public ArrayList<Creneau> getAllcreneau() {
+        ArrayList<Creneau> list = new ArrayList<>();
+        String requete = "SELECT * FROM `creneaux`";
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(requete);
+            while (rs.next()) {
+                list.add(new Creneau(
+                        rs.getInt(1),
+                        rs.getString(2)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GouvernoratSpecialiteServise.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+    public ArrayList<Creneau> getCreneaubyId(int id_medecin,String date_plan) {
+        ArrayList<Creneau> list = new ArrayList<>();
+        String requete =  "select * from `creneaux` where id_cre not in(select id_cre from `planification` where id_medecin=" +id_medecin +" and date_plan='" +date_plan +"') ";
+        try {
+            ste = cnx.createStatement();
+            rs = ste.executeQuery(requete);
+            while (rs.next()) {
+                list.add(new Creneau(
+                        rs.getInt(1),
+                        rs.getString(2)
+                ));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GouvernoratSpecialiteServise.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
+
+    
+    //////////////////////////////Fin Amine CHemsi /////////////////////////////////////////////////////
 }

@@ -1,17 +1,175 @@
 .btn{
    -fx-border: none;
-   -fx-padding: 10px;
-   -fx-margin: 5px;
-   -fx-background-color: blue;
+   -fx-padding: 5px 10px 5px 10px;
+   -fx-background-color: #0096d6;
    -fx-border-right: 0px;
-   -fx-color: #ffffff;
+   -fx-text-fill: #ffffff;
+   -fx-border-radius: 0;
+   -fx-border-radius: 50;
+   -fx-background-radius: 50; 
+   cursor: pointer
+}
+.btn:hover{
+    -fx-border-color:#0096d6;
+    -fx-border-style:solid;
+    -fx-border-width:1px ; 
+   -fx-background-color: #ffffff;
+   -fx-text-fill: #0096d6;
+}
+.btn-selrcted{
+   -fx-border-color:#0096d6;
+    -fx-border-style:solid;
+    -fx-border-width:1px ; 
+   -fx-background-color: #ffffff;
+   -fx-text-fill: #0096d6;
+   -fx-border-radius: 50;
+    -fx-background-radius: 50; 
+}
+.btnadmin{
+    -fx-pref-width: 200px;
+    -fx-border-color:#0096d6;
+    -fx-border-style:solid;
+    -fx-border-width:1px ; 
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #0096d6;
+}
+.btnadmin:hover{
+    -fx-border-width:3px ; 
 }
 .imput{
-    -fx-border: none;
-    -fx-border-bottom: solid 1px #0000ff;
+
+    -fx-background-color: #0096d611;
     -fx-padding: 10px;
     -fx-margin: 5px;
-    -fx-background-color: blue;
-    -fx-border-right: 0px;
-    -fx-color: #ffffff;
+    -fx-border-radius: 0;
+   
+}
+.btn:hover{
+    -fx-border-color:#0096d6;
+    -fx-border-style:solid;
+    -fx-border-width:1px ; 
+}
+.body{
+    -fx-background-color: #ffffff
+}
+.label{
+    -fx-text-fill: #0096d6;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:top {
+    -fx-border-color: #0096d6;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-color: white;
+    -fx-pref-height: 40px;  
+    -fx-background-insets: 0;
+    -fx-padding: 5px 28px 5px 28px;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected:top {
+    -fx-border-color: #2381E9 #0096d6 #0096d6 #0096d6;
+    -fx-border-radius: 0 0 0 0;
+    -fx-background-color: #0096d6;
+    -fx-text-fill: white;
+    -fx-pref-height: 40px;  
+    -fx-background-insets: 0;
+}
+
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #0096d6;
+    -fx-font-weight: bold;
+}
+
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color:white;
+    -fx-border-color: #0096d6;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-insets: 0;
+    -fx-pref-height: 45px;  
+}
+
+.backgroundimage1,.backgroundimage2,.backgroundimage3{
+    -fx-background-size: auto;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:  url("../images/welcome-to-our-app.jpg");
+}
+.backgroundimage2{
+    -fx-background-image:  url("../images/welcome-to-our-app.jpg");
+}
+.backgroundimage3{
+    -fx-background-image:  url("../images/welcome-to-our-app.jpg");
+}
+
+
+.table-view{
+-fx-background-color: transparent;
+}
+.table-view:focused{
+-fx-background-color: transparent;
+}
+/* Spaltenköpfe
+Struktur column-header-background -> column-header */
+.table-view .column-header-background{
+-fx-background-color: linear-gradient(#ffffff 0%, #0096d6 100%);
+}
+.table-view .column-header-background .label{
+-fx-background-color: transparent;
+-fx-text-fill: white;
+}
+.table-view .column-header {
+-fx-background-color: transparent;
+}
+.table-view .table-cell{
+-fx-text-fill: white;
+}
+.table-row-cell{
+-fx-background-color: -fx-table-cell-border-color, #0096d666;
+-fx-background-insets: 0, 0 0 1 0;
+-fx-padding: 0.0em; /* 0 */
+-fx-font-weight: bold;
+}
+.table-row-cell:odd{
+-fx-background-color: -fx-table-cell-border-color, #0096d6;
+-fx-background-insets: 0, 0 0 1 0;
+-fx-padding: 0.0em; /* 0 */  
+-fx-font-weight: bold;
+}
+.table-row-cell:selected {
+-fx-background-color: #0096d699;
+-fx-background-insets: 0;
+-fx-background-radius: 1;
+}
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background, 
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+-fx-background-color: transparent;
+}
+.table-view > .virtual-flow > .scroll-bar > .increment-button, 
+.table-view > .virtual-flow > .scroll-bar > .decrement-button {
+-fx-opacity: 0;
+}
+.texterror{
+    -fx-text-fill: #ff0000;
+}
+.img_prof{
+    -fx-border-radius: 50;
+    -fx-background-radius: 50; 
+}
+.bg-fleche{
+    -fx-background-size: 30px 30px;
+    -fx-background-position: center;
+    -fx-background-repeat: no-repeat;
+    -fx-background-image:  url("../images/fleche.png");
 }

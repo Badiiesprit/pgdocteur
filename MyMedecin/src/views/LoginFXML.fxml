@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -14,45 +15,51 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="body" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.LoginFXMLController">
    <children>
-      <TabPane layoutX="521.0" layoutY="-1.0" prefHeight="600.0" prefWidth="279.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane accessibleRole="COMBO_BOX" layoutX="521.0" layoutY="-1.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="600.0" prefWidth="279.0" style="-fx-border-color: #0096d6; -fx-border-width: 0px 2px 0px 0px;" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Connexion">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="571.0" prefWidth="360.0">
                      <children>
-                        <Label alignment="CENTER" layoutX="39.0" layoutY="98.0" prefHeight="35.0" prefWidth="202.0" text="Connexion">
-                           <font>
-                              <Font name="System Bold Italic" size="24.0" />
-                           </font>
-                        </Label>
                         <GridPane layoutX="9.0" layoutY="190.0" prefHeight="191.0" prefWidth="261.0">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="89.0" />
-                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="143.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="184.0" minWidth="10.0" prefWidth="171.0" />
+                            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="265.0" minWidth="10.0" prefWidth="90.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Login">
+                              <Label prefHeight="0.0" prefWidth="44.0" text="Login :" GridPane.columnIndex="1">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label text="Mot de passe" GridPane.rowIndex="1">
+                              <Label text="Mot de passe :" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="login" styleClass="imput" stylesheets="@../style/style.css" GridPane.columnIndex="1" />
-                              <PasswordField fx:id="pass" styleClass="imput" stylesheets="@../style/style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Button mnemonicParsing="false" onAction="#clickLogin" styleClass="btn" stylesheets="@../style/style.css" text="Connexion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="login" alignment="CENTER_RIGHT" promptText="Votre identifiant" styleClass="imput" stylesheets="@../style/style.css" />
+                              <PasswordField fx:id="pass" alignment="CENTER_RIGHT" promptText="Votre mot de passe" styleClass="imput" stylesheets="@../style/style.css" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" onAction="#clickLogin" prefHeight="27.0" prefWidth="184.0" styleClass="btn" stylesheets="@../style/style.css" text="Connexion" GridPane.rowIndex="3" />
+                              <Label onMouseClicked="#forgot_password" text="Mot de passe oublié" GridPane.rowIndex="2">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Label>
                            </children>
                         </GridPane>
+                        <Label fx:id="error" alignment="CENTER" contentDisplay="CENTER" layoutX="-2.0" layoutY="173.0" prefHeight="17.0" prefWidth="279.0" styleClass="texterror" textAlignment="CENTER" textFill="RED">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
             </content>
@@ -112,5 +119,10 @@
           </Tab>
         </tabs>
       </TabPane>
+      <ImageView fitHeight="521.0" fitWidth="516.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/home.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

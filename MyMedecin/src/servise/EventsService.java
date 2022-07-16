@@ -31,8 +31,8 @@ public class EventsService implements IService<Events>{
     
     @Override
     public void insert(Events c) {
-        String requete = "insert into events (name,description,date_deb,date_fin,nb_participant,id_specialite,id_gouvernerat) "
-                + "values ('" + c.getName() + "','" + c.getDescription() + "','" + c.getDate_deb()+ "','" + c.getDate_fin() + "','" + c.getNb_participant() + "','" + c.getId_gouvernorat() + "','" + c.getId_specialite() + "')";
+        String requete = "insert into events (name,description,date_deb,date_fin,nb_participant,id_specialite,id_gouvernerat,type_participant) "
+                + "values ('" + c.getName() + "','" + c.getDescription() + "','" + c.getDate_deb()+ "','" + c.getDate_fin() + "','" + c.getNb_participant() + "','" + c.getId_gouvernorat() + "','" + c.getId_specialite() + "'," + c.getNb_participant() + ")";
         try {
             ste = cnx.createStatement();
             ste.executeUpdate(requete);

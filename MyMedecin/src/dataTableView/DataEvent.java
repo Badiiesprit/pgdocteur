@@ -21,8 +21,9 @@ public class DataEvent {
     private String gouvernerat;
     private Integer participant;
     private Button delete;
+    private Button update;
 
-    public DataEvent(int id, String event, String description, String date_deb, String date_fin, String specialite, String gouvernerat, Integer participant, Button delete) {
+    public DataEvent(int id, String event, String description, String date_deb, String date_fin, String specialite, String gouvernerat, Integer participant, Button delete ,Button update) {
         this.id = id;
         this.event = event;
         this.description = description;
@@ -32,6 +33,10 @@ public class DataEvent {
         this.gouvernerat = gouvernerat;
         this.participant = participant;
         this.delete = delete;
+        this.update = update;
+    }
+
+    public DataEvent() {
     }
 
     public Integer getId() {
@@ -104,6 +109,14 @@ public class DataEvent {
 
     public void setDelete(Button delete) {
         this.delete = delete;
+    }
+
+    public Button getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(Button update) {
+        this.update = update;
     }
     
 

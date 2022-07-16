@@ -100,10 +100,18 @@ public class UserService implements IService<User>{
 
     @Override
     public void update(User t) {
-        String requete = "update user set nom='"+t.getNom()+"',prenom='"+t.getPrenom()+"',adresse='"+t.getAdresse()+"',phone='"+t.getPhone()+"',login='"+t.getLogin()+"'   where id="+t.getId();
-        if(t.getPassword().length()>0){
-            requete = "update user set nom='"+t.getNom()+"',prenom='"+t.getPrenom()+"',adresse='"+t.getAdresse()+"',phone='"+t.getPhone()+"',password='"+t.getPassword()+"',login='"+t.getLogin()+"'   where id="+t.getId();
+        String requete = "update user set nom='"+t.getNom()+"',prenom='"+t.getPrenom()+"',adresse='"+t.getAdresse()+"',phone='"+t.getPhone()+"',login='"+t.getLogin()+"'";
+                
+        if( t.getPassword()!=null && t.getPassword().length()>0){
+            requete += ",password='"+t.getPassword()+"'";
         }
+        if(t.getPhoto_profil()!=null && t.getPhoto_profil().length()>0){
+            requete += ",photo_profil='"+t.getPhoto_profil()+"'";
+        }
+        
+        requete += "   where id="+t.getId();
+        System.out.println("servise.UserService.update()");
+        System.out.println(requete);
         try {
             ste=cnx.createStatement();
             ste.executeUpdate(requete);
@@ -143,10 +151,87 @@ public class UserService implements IService<User>{
         }
         return list;
     }
+    
+    public ArrayList<User> getAllMedecines() {
+        ArrayList<User> list=new ArrayList<>();
+        String requete="select * from user where role=2 order by id desc";
+        try {
+            ste=cnx.createStatement();
+           rs=ste.executeQuery(requete);
+           while(rs.next()){
+              
+             
 
+                       
+               list.add(new User(
+                       rs.getInt("id"), 
+                       rs.getString("nom"),
+                       rs.getString("prenom"),
+                       rs.getString("login"),
+                       rs.getString("password"),
+                       rs.getString("phone"),
+                       rs.getString("adresse"), 
+                       rs.getString("photo_profil"), 
+                       rs.getInt("role"),
+                       rs.getInt("statu")
+               ));
+           }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
+    }
     @Override
     public User getById(int id) {
         String requete="select * from user where id="+id;
+        try {
+            ste=cnx.createStatement();
+            rs=ste.executeQuery(requete);
+            while(rs.next()){
+                return new User(
+                    rs.getInt("id"), 
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("login"),
+                    rs.getString("password"),
+                    rs.getString("phone"), 
+                    rs.getString("adresse"),
+                    rs.getString("photo_profil"),
+                    rs.getInt("role"),
+                    rs.getInt("statu")
+                );
+            }
+            return new User();
+        } catch (SQLException ex) {
+            return new User();
+        }
+    }
+    public User getByCode(String code) {
+        String requete="select * from user where code="+code;
+        try {
+            ste=cnx.createStatement();
+            rs=ste.executeQuery(requete);
+            while(rs.next()){
+                return new User(
+                    rs.getInt("id"), 
+                    rs.getString("nom"),
+                    rs.getString("prenom"),
+                    rs.getString("login"),
+                    rs.getString("password"),
+                    rs.getString("phone"), 
+                    rs.getString("adresse"),
+                    rs.getString("photo_profil"),
+                    rs.getInt("role"),
+                    rs.getInt("statu")
+                );
+            }
+            return new User();
+        } catch (SQLException ex) {
+            return new User();
+        }
+    }
+    public User getByEmail(String login) {
+        String requete="select * from user where login='"+login+"'";
         try {
             ste=cnx.createStatement();
             rs=ste.executeQuery(requete);
@@ -195,6 +280,16 @@ public class UserService implements IService<User>{
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    public void setCodeValidationUser( String code , int id ) throws SQLException{
+        String req="update user set code="+code+" where id="+id;
+        
+        try {
+            ste=cnx.createStatement();
+            ste.executeUpdate(req);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

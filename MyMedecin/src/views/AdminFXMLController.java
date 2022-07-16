@@ -146,5 +146,12 @@ public class AdminFXMLController implements Initializable {
         Parent root = loader.load();
         tab_user.getScene().setRoot(root);
     }
+
+    @FXML
+    private void listeEvents(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Event/EventFXML.fxml"));
+        Parent root = loader.load();
+        tab_user.getScene().setRoot(root);
+    }
     
 }

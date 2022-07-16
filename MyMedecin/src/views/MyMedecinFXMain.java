@@ -21,9 +21,10 @@ import javafx.stage.Stage;
  * @author badi9
  */
 public class MyMedecinFXMain extends Application {
-    
+    private Stage stage;
     @Override
     public void start(Stage primaryStage) throws IOException {
+        this.stage= primaryStage;
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -37,6 +38,10 @@ public class MyMedecinFXMain extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+    public void resizeScene(double width, double height) {
+        this.stage.setWidth(width);
+        this.stage.setHeight(height);
     }
     
 }

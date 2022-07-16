@@ -41,11 +41,16 @@ public class LoginService {
         
         try {
             ste = cnx.createStatement();
-            String sql = "SELECT * FROM user WHERE statu=1 AND login ='"+login+"' AND password = '"+password+"'";
+            String sql = "SELECT * FROM user WHERE login ='"+login+"' AND password = '"+password+"'";
             rs = ste.executeQuery(sql);
             while(rs.next()){
-                LoginService.setUserConnected(rs.getInt(1));
-                return rs.getInt(1);
+                if(rs.getInt("statu")==1){
+                    LoginService.setUserConnected(rs.getInt(1));
+                    return 1;
+                }else{
+                    LoginService.setUserConnected(0);
+                    return -1;
+                }
             }
             LoginService.setUserConnected(0);
             return 0;
@@ -59,10 +64,11 @@ public class LoginService {
         
         try {
             ste = cnx.createStatement();
-            String sql = "SELECT * FROM user WHERE statu=1 AND role=10 AND login ='"+login+"' AND password = '"+password+"'";
+            String sql = "SELECT * FROM user WHERE role=10 AND login ='"+login+"' AND password = '"+password+"'";
             rs = ste.executeQuery(sql);
             while(rs.next()){
                 LoginService.setUserConnected(rs.getInt(1));
+                
                 return rs.getInt(1);
             }
             //LoginService.setUserConnected(0);

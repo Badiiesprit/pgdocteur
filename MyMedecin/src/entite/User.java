@@ -22,6 +22,7 @@ public class User {
     private String password;
     private String login;
     private int statu;
+    private String code;
 
     public User(String nom,String prenom,String login,String password,String phone,String adresse,String photo_profil,int role) {
         this.nom = nom;
@@ -57,6 +58,10 @@ public class User {
         this.photo_profil =photo_profil;
         this.role = role;
         this.statu = statu;
+    }
+
+    public User(int aInt, String string, String string0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public int getId() {
         return id;
@@ -134,20 +139,19 @@ public class User {
         this.statu = statu;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     
 
     @Override
     public String toString() {
-        if(role == 2){
-            return "Medecines : " + nom + " " + prenom;
-        }
-        if(role == 3){
-            return "Pharmacie : " + nom + " " + prenom;
-        }
-        if(role == 4){
-            return "Admin : " + nom + " " + prenom;
-        }
-        return "Patient : " + nom + " " + prenom;
+        return  nom + " " + prenom;
     }
     
 }

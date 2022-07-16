@@ -14,9 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import servise.LoginService;
 
 /**
@@ -30,6 +32,8 @@ public class LoginFXMLController implements Initializable {
     private TextField login;
     @FXML
     private PasswordField pass;
+    @FXML
+    private Label error;
 
     /**
      * Initializes the controller class.
@@ -37,28 +41,44 @@ public class LoginFXMLController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        login.setText("patient");
+        pass.setText("123456");
     }  
 
     @FXML
     private void clickLogin(ActionEvent event) throws SQLException, IOException {
+        
         LoginService ls = new LoginService();
+        System.out.println(" test 1");
+        //error.setText("");
+        System.out.println(" test 2");
         if(!login.getText().isEmpty() && !pass.getText().isEmpty()){
+            System.out.println(" test 3");
             int user_id = ls.validLogin(login.getText(), pass.getText());
+            
             System.out.println("user_id"+user_id);
-            if(user_id!=0){
+            if(user_id>0){
+                System.out.println(" loGIN AdminFXML");
                 user_id = ls.validLoginAdmin(login.getText(), pass.getText());
                 if(user_id!=0){
+                    System.out.println("AdminFXML");
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminFXML.fxml"));
                     Parent root = loader.load();
                     login.getScene().setRoot(root);
                 }else{
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("HomeFXML.fxml"));
                     Parent root = loader.load();
-                    login.getScene().setRoot(root);  
+                    login.getScene().setRoot(root);
+                    
                 }
                 
             }else{
-                System.out.println("non connecte");
+                System.out.println("LoginFXMLController : "+user_id);
+                if(user_id == -1){
+                    error.setText("Votre compte est désactivé.");
+                }else{
+                    error.setText("Mot de passe ou email non valide.");
+                }    
             }  
         }
         
@@ -96,18 +116,23 @@ public class LoginFXMLController implements Initializable {
     }
 
     @FXML
-    private void keyPressedPatient(KeyEvent event) throws IOException {
-        this.Patient();
+    private void keyPressedMedecin(MouseEvent event) {
+        
     }
 
     @FXML
-    private void keyPressedMedecin(KeyEvent event) throws IOException {
-        this.Medecin();
+    private void keyPressedPharmacien(MouseEvent event) {
     }
 
     @FXML
-    private void keyPressedPharmacien(KeyEvent event) throws IOException {
-        this.Pharmacien();
+    private void keyPressedPatient(MouseEvent event) {
+    }
+
+    @FXML
+    private void forgot_password(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("forgotpasswordFXML.fxml"));
+        Parent root = loader.load();
+        login.getScene().setRoot(root);
     }
     
 }
