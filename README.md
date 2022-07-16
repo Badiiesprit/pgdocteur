@@ -13,7 +13,8 @@ Project My Docteur java , javaFX , codename One
 ![insc_ph](https://user-images.githubusercontent.com/106381999/179354125-8bb14c95-e0e6-46cb-8fcf-f3eeebb5da94.JPG)
 <br>Inscription Patient<br>
 ![insc_p](https://user-images.githubusercontent.com/106381999/179354122-6a5ddcc4-332a-4e1b-979e-e45a8bde9b2f.JPG)
-<br>Mot de passe oublié:<br>
+<br>Mot de passe oublié:
+
 ![mdpo](https://user-images.githubusercontent.com/106381999/179355087-d31d8675-b295-4fd4-9b79-0cb0ab05652e.JPG)
 <br>Nouveau mot de passe:<br>
 ![newMdp](https://user-images.githubusercontent.com/106381999/179355088-1a5ef796-370b-45cf-a12e-75350c12157f.JPG)
@@ -29,5 +30,15 @@ Project My Docteur java , javaFX , codename One
 ![calander](https://user-images.githubusercontent.com/106381999/179355528-57ce10fb-2b53-439a-930a-a89325dd3ca6.JPG)
 <br>Rendezvous:<br>
 ![rdv](https://user-images.githubusercontent.com/106381999/179355527-068f1544-6110-47a0-9ffa-58b799f7f6ac.JPG)
-<br>Espace Administrateur:<br>
+<br>Evénements:<br>
+![event](https://user-images.githubusercontent.com/106381999/179360722-775cd324-9792-4dd7-a68d-9616de2f2f0f.JPG)
+# Espace Administrateur
+<br>Gestion des utilisateurs:<br>
 ![admin user](https://user-images.githubusercontent.com/106381999/179355856-14449e19-dd6d-4645-b510-2c648c2bc06c.JPG)
+<br>Gestion des Evénements :<br>
+<br>![admin event](https://user-images.githubusercontent.com/106381999/179360704-ea46a027-8225-44ca-96df-311a5a7b62d0.JPG)
+<br>Gestion des Evénements -> Ajouter:<br>
+![add event](https://user-images.githubusercontent.com/106381999/179360725-4fc8ee70-b14e-4d39-a304-a3ef12f45b0f.JPG)
+<br>Gestion des Evénements -> Mettre à jour:<br>
+![update event](https://user-images.githubusercontent.com/106381999/179360724-ce0b2302-0109-4e6f-b554-e636291a3273.JPG)
+
