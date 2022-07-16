@@ -7,6 +7,9 @@ package views.Rendezvous;
 
 import dataTableView.Calendrier;
 import entite.Rendezvous;
+import entite.User;
+import java.awt.image.BufferedImage;
+import java.io.File;
 //import entite.User;
 //import java.awt.Color;
 //import java.awt.Insets;
@@ -18,10 +21,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 //import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.util.logging.Level;
 //import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 //import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -35,16 +41,21 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
+import javax.imageio.ImageIO;
 //import javafx.scene.layout.Border;
 //import javafx.scene.layout.BorderStroke;
 //import javafx.scene.layout.BorderStrokeStyle;
 //import javafx.scene.layout.BorderWidths;
 //import javafx.scene.layout.CornerRadii;
 import servise.GouvernoratSpecialiteServise;
+import servise.LoginService;
 //import servise.LoginService;
 //import servise.UserService;
 import servise.Rvservice;
+import servise.UserService;
+import views.HomeFXMLController;
 
 /**
  * FXML Controller class
@@ -83,9 +94,30 @@ public class CalanderFXMLController implements Initializable {
         ArrayList<Rendezvous> list=rv.getAllbymedecin();
         System.out.println(list);
         this.initTable(list);
-        
+        this.initInfoUserConnected();
     }
-
+    public void  initInfoUserConnected(){
+        UserService us = new UserService();
+        User u = us.getById(LoginService.getUserConnected());
+        if(u.getRole()==2){
+            infoUserConnected1.setText("Medecine");
+        }else if(u.getRole()==3){
+            infoUserConnected1.setText("Pharmacien");
+        }else{
+            infoUserConnected1.setText("Patient");
+        }
+        //img_profile.set
+        infoUserConnected.setText(u.toString());
+        File file = new File("C:\\\\uploads\\"+u.getPhoto_profil());
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(file);
+            WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
+            img_profile.setImage(image);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     private void initTable(ArrayList<Rendezvous> list) {
 
          ObservableList<Calendrier> lrvs=FXCollections.observableArrayList();

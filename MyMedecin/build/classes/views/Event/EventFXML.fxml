@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Event.EventFXMLController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" styleClass="body" stylesheets="@../../style/style.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Event.EventFXMLController">
    <children>
-      <ToolBar prefHeight="40.0" prefWidth="800.0">
-        <items>
-            <Button mnemonicParsing="false" onAction="#home" prefWidth="100.0" text="Home" />
-          <Button mnemonicParsing="false" onAction="#ajouter" prefHeight="25.0" prefWidth="100.0" text="Ajouer" />
-        </items>
-      </ToolBar>
-      <TableView fx:id="table_event" layoutY="40.0" prefHeight="360.0" prefWidth="800.0">
+      <TableView fx:id="table_event" layoutY="70.0" prefHeight="532.0" prefWidth="800.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="25.0" text="ID" />
             <TableColumn fx:id="event" prefWidth="42.0" text="Event" />
@@ -31,5 +28,28 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Label alignment="CENTER" prefHeight="25.0" prefWidth="800.0" text="Espace Administrateur">
+         <font>
+            <Font name="Comic Sans MS Bold Italic" size="18.0" />
+         </font>
+      </Label>
+      <ToolBar accessibleRole="IMAGE_VIEW" layoutY="25.0" prefHeight="40.0" prefWidth="800.0" styleClass="body">
+         <items>
+            <Button mnemonicParsing="false" onAction="#home" styleClass="btn" text="Utilisateurs" />
+            <Button mnemonicParsing="false" text="Evénements">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="btn-selrcted" />
+               </styleClass>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#deconnecter" styleClass="btn" text="Se déconnecter" />
+         </items>
+      </ToolBar>
+      <Button layoutX="676.0" layoutY="1.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter Evénement">
+         <styleClass>
+            <String fx:value="btn" />
+            <String fx:value="btn-selrcted" />
+         </styleClass>
+      </Button>
    </children>
 </AnchorPane>

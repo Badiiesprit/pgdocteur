@@ -10,14 +10,19 @@ import javafx.scene.control.TextArea;
 import entite.Creneau;
 import entite.Rendezvous;
 import entite.User;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,13 +34,16 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.text.Text;
+import javax.imageio.ImageIO;
 import servise.GouvernoratSpecialiteServise;
 import servise.LoginService;
 import servise.MedecinesService;
 import servise.Rvservice;
 import servise.UserService;
 import static sun.security.jgss.GSSUtil.login;
+import views.HomeFXMLController;
 //import servise.MedecinesService;
 
 /**
@@ -79,7 +87,6 @@ public class RendezvousFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         UserService us = new UserService();
         
-        infoUserConnected1.setText("Bonjour MR : " + us.getById(LoginService.getUserConnected()).toString());
         nameP.setText(us.getById(LoginService.getUserConnected()).toString());
         System.out.println("Bonjour MR : " + LoginService.getUserConnected());
         //System.out.println(us.LoginService.getUserConnected(0));
@@ -92,10 +99,31 @@ public class RendezvousFXMLController implements Initializable {
                 setDisable(empty || dp.compareTo(today)<0);
             }
         });
-        
+        this.initInfoUserConnected();
         
     }
-
+    public void  initInfoUserConnected(){
+        UserService us = new UserService();
+        User u = us.getById(LoginService.getUserConnected());
+        if(u.getRole()==2){
+            infoUserConnected1.setText("Medecine");
+        }else if(u.getRole()==3){
+            infoUserConnected1.setText("Pharmacien");
+        }else{
+            infoUserConnected1.setText("Patient");
+        }
+        //img_profile.set
+        infoUserConnected.setText(u.toString());
+        File file = new File("C:\\\\uploads\\"+u.getPhoto_profil());
+        BufferedImage bufferedImage;
+        try {
+            bufferedImage = ImageIO.read(file);
+            WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
+            img_profile.setImage(image);
+        } catch (IOException ex) {
+            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     @FXML
     private void home(ActionEvent event) throws IOException {
        

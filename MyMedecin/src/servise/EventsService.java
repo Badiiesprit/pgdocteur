@@ -55,7 +55,8 @@ public class EventsService implements IService<Events>{
 
     @Override
     public void update(Events t) {
-        String requete = "update events set name='"+t.getName()+"' ,description='"+t.getDescription()+"' ,date_deb="+t.getDate_deb()+" ,date_fin="+t.getDate_fin()+" where id="+t.getId()+"";
+        String requete = "update events set name='"+t.getName()+"' ,description='"+t.getDescription()+"' ,date_deb='"+t.getDate_deb()+"' ,date_fin='"+t.getDate_fin()+"' where id="+t.getId()+"";
+        System.out.println(requete);
         try {
             ste = cnx.createStatement();
             ste.executeUpdate(requete);
@@ -113,6 +114,15 @@ public class EventsService implements IService<Events>{
             Logger.getLogger(EventsService.class.getName()).log(Level.SEVERE, null, ex);
         }
         return new Events();
+    }
+    public void setNbParticipant(int id,int nb) {
+        String requete = "update events set nb_participant='"+nb+"' where id="+id+"";
+        try {
+            ste = cnx.createStatement();
+            ste.executeUpdate(requete);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventsService.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }

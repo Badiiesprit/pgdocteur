@@ -40,8 +40,6 @@ import servise.LoginService;
 public class AdminFXMLController implements Initializable {
 
     @FXML
-    private Text titel_table;
-    @FXML
     private TableView<DataUser> tab_user;
     @FXML
     private TableColumn<DataUser, Integer> col_id;
@@ -78,6 +76,8 @@ public class AdminFXMLController implements Initializable {
         list.forEach(user ->{
             if(user.getRole()!=10){
                 Button btnstatus = new Button(user.getStatu()==1?"valide":"in valide");
+                btnstatus.getStyleClass().add("btn");
+                btnstatus.getStyleClass().add("btnadmin");
                 btnstatus.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -94,6 +94,8 @@ public class AdminFXMLController implements Initializable {
                     }
                 });
                 Button btndelete = new Button("Delete");
+                btndelete.getStyleClass().add("btn");
+                btndelete.getStyleClass().add("btnadmin");
                 btndelete.setOnAction(new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
@@ -147,8 +149,10 @@ public class AdminFXMLController implements Initializable {
         tab_user.getScene().setRoot(root);
     }
 
+
+
     @FXML
-    private void listeEvents(ActionEvent event) throws IOException {
+    private void event(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Event/EventFXML.fxml"));
         Parent root = loader.load();
         tab_user.getScene().setRoot(root);

@@ -85,6 +85,8 @@ public class EventFXMLController implements Initializable {
         list.forEach(event_med ->{
             
             Button btnstatus = new Button("Update");
+            btnstatus.getStyleClass().add("btn");
+            btnstatus.getStyleClass().add("btnadmin");
             btnstatus.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -103,6 +105,8 @@ public class EventFXMLController implements Initializable {
                 }
             });
             Button btndelete = new Button("Delete");
+            btndelete.getStyleClass().add("btn");
+            btndelete.getStyleClass().add("btnadmin");
             btndelete.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -155,8 +159,15 @@ public class EventFXMLController implements Initializable {
     @FXML
     private void home(ActionEvent event) throws IOException {
         System.out.println("views.Event.EventFXMLController.home()");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../HomeFXML.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../AdminFXML.fxml"));
         Parent root = loader.load();
         table_event.getScene().setRoot(root);
     }
+
+    @FXML
+    private void deconnecter(ActionEvent event) {
+        
+    }
+
+   
 }

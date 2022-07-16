@@ -50,11 +50,14 @@ public class UpdateEventFXMLController implements Initializable {
     private DatePicker date_fin;
     @FXML
     private TextArea description;
-    @FXML
-    private ComboBox<Events> liste_event;
+  
 
     private static int idevent ;
-
+    
+    private Specialite spec;
+    
+    private Gouvernorat gouv;
+    
     public static int getIdevent() {
         return idevent;
     }
@@ -71,8 +74,32 @@ public class UpdateEventFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initComboBox("g");initComboBox("s");initComboBox("t");
-        initComboBox("e");
+        
+        EventsService es = new EventsService();
+        Events e = es.getById(UpdateEventFXMLController.getIdevent());
+        name.setText(e.getName());
+        description.setText(e.getDescription());
+        nb_participant.setText(String.valueOf(e.getNb_participant()));
+        GouvernoratSpecialiteServise gss = new GouvernoratSpecialiteServise();
+        ArrayList<Gouvernorat> list_g=gss.getAllGouvernorat();
+        ArrayList<Specialite> list_s=gss.getAllSpecialite();
 
+        list_g.forEach(gouvernorat->{
+            if(gouvernorat.getId()==e.getId_gouvernorat()){
+                gouv = gouvernorat;
+            }
+        });
+        
+        list_s.forEach(specialite->{
+             if(specialite.getId()==e.getId_specialite()){
+                spec = specialite;
+            }
+        });
+        specialite.setValue(spec);
+        gouvernerat.setValue(gouv);
+        date_deb.setValue(e.getDate_deb().toLocalDate());
+        date_fin.setValue(e.getDate_fin().toLocalDate());
+        
     }  
     
     public void initComboBox(String type){
@@ -94,17 +121,11 @@ public class UpdateEventFXMLController implements Initializable {
             ObservableList<String> obs=FXCollections.observableArrayList(list);
             type_participant.setItems(obs);
         }
-        if(type=="e"){
-            EventsService es = new EventsService();
-            ArrayList<Events> list=es.getAll();
-            System.out.println("UpdateEvent initComboBox :: "+ list);
-            ObservableList<Events> obs=FXCollections.observableArrayList(list);
-            liste_event.setItems(obs);
-        }
+        
     }
 
     @FXML
-    private void update(ActionEvent event) {
+    private void update(ActionEvent event) throws IOException {
         EventsService es =new EventsService();
         Events e=new Events();
         Date date_d=new Date(0);
@@ -125,6 +146,9 @@ public class UpdateEventFXMLController implements Initializable {
         e.setType_particpant(type);
         es.update(e);
         UpdateEventFXMLController.setIdevent(0);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("EventFXML.fxml"));
+        Parent root = loader.load();
+        name.getScene().setRoot(root);
     }
 
     @FXML
@@ -139,6 +163,14 @@ public class UpdateEventFXMLController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EventFXML.fxml"));
         Parent root = loader.load();
         name.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void home(ActionEvent event) {
+    }
+
+    @FXML
+    private void deconnecter(ActionEvent event) {
     }
     
 }

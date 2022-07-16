@@ -27,6 +27,7 @@ import javafx.scene.control.TextField;
 import servise.EventsService;
 
 import servise.GouvernoratSpecialiteServise;
+import servise.LoginService;
 
 /**
  * FXML Controller class
@@ -107,11 +108,30 @@ public class InsertEventFXMLController implements Initializable {
         name.getScene().setRoot(root);
     }
 
-    @FXML
     private void liste(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("EventFXML.fxml"));
         Parent root = loader.load();
         name.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void home(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminFXML.fxml"));
+        Parent root = loader.load();
+        name.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void deconnecter(ActionEvent event) throws IOException {
+        LoginService.setUserConnected(0);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginFXML.fxml"));
+        Parent root = loader.load();
+        name.getScene().setRoot(root);
+    }
+
+    @FXML
+    private void ajouter(ActionEvent event) {
+        
     }
 
     
