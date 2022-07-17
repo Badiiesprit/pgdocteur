@@ -5,6 +5,8 @@
  */
 package entite;
 
+import servise.UserService;
+
 /**
  *
  * @author badi9
@@ -101,5 +103,12 @@ public class Medecines {
 
     public void setGallery_cabinet(String gallery_cabinet) {
         this.gallery_cabinet = gallery_cabinet;
+    }
+    public String toString() {
+        UserService us =new  UserService();
+        User u =us.getById(this.id_user);
+        System.out.println(u);
+        System.out.println(this.id_user);
+        return u.toString();
     }
 }

@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
@@ -27,6 +28,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -70,6 +72,8 @@ public class ProfiPatientController implements Initializable {
     private Text infoUserConnected1;
     @FXML
     private Text infoUserConnected;
+    @FXML
+    private Button btn_rdv;
 
     /**
      * Initializes the controller class.
@@ -83,16 +87,9 @@ public class ProfiPatientController implements Initializable {
         adresse.setText(u.getAdresse());
         phone.setText(u.getPhone());
         login.setText(u.getLogin());
-        //File file = new File(u.getPhoto_profil());
-        File file = new File("C:\\\\uploads\\"+u.getPhoto_profil());
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = ImageIO.read(file);
-            WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
-            img.setImage(image);
-        } catch (IOException ex) {
-            Logger.getLogger(ProfiPatientController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        Image image = new Image("http://localhost/uploads/"+u.getPhoto_profil());
+        img.setImage(image);
             
         phone.textProperty().addListener(new ChangeListener<String>(){
             @Override
@@ -107,10 +104,23 @@ public class ProfiPatientController implements Initializable {
             }
             
         });
-        initInfoUserConnected();
+        try {
+            initInfoUserConnected();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(ProfiPatientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        int role = us.getById(LoginService.getUserConnected()).getRole();
+        if (role == 1) {
+            btn_rdv.setText("Prendre rendez-vous");
+        } else if (role == 2) {
+            btn_rdv.setText("Calendrier");
+        } else if (role == 3) {
+            btn_rdv.setText("Pharmacie");;
+        }
     }   
     
-    public void  initInfoUserConnected(){
+    public void  initInfoUserConnected() throws MalformedURLException{
         UserService us = new UserService();
         User u = us.getById(LoginService.getUserConnected());
         if(u.getRole()==2){
@@ -122,15 +132,10 @@ public class ProfiPatientController implements Initializable {
         }
         //img_profile.set
         infoUserConnected.setText(u.toString());
-        File file = new File("C:\\\\uploads\\"+u.getPhoto_profil());
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = ImageIO.read(file);
-            WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
-            img_profile.setImage(image);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+        Image image = new Image("http://localhost/uploads/"+u.getPhoto_profil());
+        img_profile.setImage(image);
+       
     }
 
     @FXML
@@ -181,21 +186,26 @@ public class ProfiPatientController implements Initializable {
         }
         u.setPhoto_profil(null);
         if(person_image!= null){
-            String fileLocation = new File("c:\\uploads").getAbsolutePath() + "\\Patient-"+u.getId()+".jpg" ;
+            int random_int = (int)Math.floor(Math.random()*(9999-1000)+1000);
+            String fileName = "Patient-"+u.getId()+"-"+random_int+".jpg";
+            String fileLocation = new File("C:\\\\xampp\\htdocs\\uploads").getAbsolutePath() + "\\"+fileName ;
             FileOutputStream output = new FileOutputStream(fileLocation);
             output.write(person_image);
             output.close();
-            u.setPhoto_profil("Patient-"+u.getId()+".jpg");
+            u.setPhoto_profil(fileName);
         }
         
         us.update(u);
         valideupdate.setText("Votre profil est mis à jour avec succès");
+        Image image = new Image("http://localhost/uploads/"+u.getPhoto_profil());
+        img_profile.setImage(image);
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                valideupdate.setText("");
+                valideupdate.setText(""); 
             }
         }, 5000L);
+       
     }
     
     @FXML
@@ -245,7 +255,17 @@ public class ProfiPatientController implements Initializable {
     }
 
     @FXML
-    private void updateUser(ActionEvent event) {
+    private void updateUser(ActionEvent event) throws IOException {
+         UserService us = new UserService();
+        int role =us.getById(LoginService.getUserConnected()).getRole();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("profiPatient.fxml"));
+        if(role==2){
+            loader = new FXMLLoader(getClass().getResource("ProfilMedecin.fxml"));
+        }else if(role==3){
+            loader = new FXMLLoader(getClass().getResource("ProfilPharmacie.fxml"));
+        }
+        Parent root = loader.load();
+        infoUserConnected.getScene().setRoot(root);
     }
 
     @FXML
@@ -253,15 +273,41 @@ public class ProfiPatientController implements Initializable {
     }
 
     @FXML
-    private void event(ActionEvent event) {
+    private void event(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Event/participantEventFXML.fxml"));
+        Parent root = loader.load();
+        img_profile.getScene().setRoot(root);
     }
 
     @FXML
-    private void forum(ActionEvent event) {
+    private void forum(ActionEvent event) throws IOException {
+        UserService us = new UserService();
+        User u = us.getById(LoginService.getUserConnected());
+        if(u.getRole()==1){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Forum/ReponseHome.fxml"));
+            Parent root = loader.load();
+            img_profile.getScene().setRoot(root);
+        }else if(u.getRole()==2){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Forum/BlogFXML.fxml"));
+            Parent root = loader.load();
+            img_profile.getScene().setRoot(root);
+        }else{
+            
+        }
     }
 
     @FXML
-    private void rensezvous(ActionEvent event) {
+    private void rensezvous(ActionEvent event) throws IOException {
+        UserService us = new UserService();
+        int role = us.getById(LoginService.getUserConnected()).getRole();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Rendezvous/RendezvousFXML.fxml"));
+        if (role == 2) {
+            loader = new FXMLLoader(getClass().getResource("Rendezvous/CalanderFXML.fxml"));
+        } else if (role == 3) {
+            loader = new FXMLLoader(getClass().getResource("HomeFXML.fxml"));
+        }
+        Parent root = loader.load();
+        img_profile.getScene().setRoot(root);
     }
 
     @FXML

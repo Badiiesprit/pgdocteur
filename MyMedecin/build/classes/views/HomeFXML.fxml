@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
@@ -46,42 +47,63 @@
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                       <Button mnemonicParsing="false" onAction="#home" prefWidth="140.0" text="Home" GridPane.rowIndex="4">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#rechercher" prefWidth="140.0" text="Rechercher Medecin" GridPane.rowIndex="5">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="NONE" />
+                           </cursor>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#event" prefWidth="140.0" text="Evénements" GridPane.rowIndex="6">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#forum" prefWidth="140.0" text="Forum" GridPane.rowIndex="7">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Button fx:id="btn_rdv" mnemonicParsing="false" onAction="#rensezvous" prefWidth="140.0" text="prendre rendez-vous" GridPane.rowIndex="8">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#deconnecter" prefWidth="140.0" text="Se déconnecter" GridPane.rowIndex="9">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
                            </styleClass>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </Button>
                         <ImageView fx:id="img_profile" fitHeight="114.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true" style="-fx-border-radius: 50; -fx-background-radius: 50; -fx-background-color: #000000;" styleClass="img_prof" GridPane.rowIndex="1">
                            <image>

@@ -70,7 +70,7 @@
                               <String fx:value="img_prof" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#rensezvous" prefWidth="140.0" text="prendre rendez-vous" GridPane.rowIndex="8">
+                        <Button fx:id="btn_rdv" mnemonicParsing="false" onAction="#rensezvous" prefWidth="140.0" text="prendre rendez-vous" GridPane.rowIndex="8">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />

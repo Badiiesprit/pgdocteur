@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
@@ -54,7 +55,7 @@ public class HomeFXMLController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        initInfoUserConnected();
+        
         /*engine = webv.getEngine();
         engine.load("https://google.tn");
         webv.setVisible(false);*/
@@ -67,6 +68,7 @@ public class HomeFXMLController implements Initializable {
         } else if (role == 3) {
             btn_rdv.setText("Pharmacie");;
         }
+        initInfoUserConnected();
     }    
 
     public void  initInfoUserConnected(){
@@ -81,15 +83,8 @@ public class HomeFXMLController implements Initializable {
         }
         //img_profile.set
         infoUserConnected.setText(u.toString());
-        File file = new File("C:\\\\uploads\\"+u.getPhoto_profil());
-        BufferedImage bufferedImage;
-        try {
-            bufferedImage = ImageIO.read(file);
-            WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
-            img_profile.setImage(image);
-        } catch (IOException ex) {
-            Logger.getLogger(HomeFXMLController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Image image = new Image("http://localhost/uploads/"+u.getPhoto_profil());
+        img_profile.setImage(image);
     }
     @FXML
     private void home(ActionEvent event) {
@@ -107,7 +102,20 @@ public class HomeFXMLController implements Initializable {
     }
 
     @FXML
-    private void forum(ActionEvent event) {
+    private void forum(ActionEvent event) throws IOException {
+        UserService us = new UserService();
+        User u = us.getById(LoginService.getUserConnected());
+        if(u.getRole()==1){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Forum/ReponseHome.fxml"));
+            Parent root = loader.load();
+            img_profile.getScene().setRoot(root);
+        }else if(u.getRole()==2){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Forum/BlogFXML.fxml"));
+            Parent root = loader.load();
+            img_profile.getScene().setRoot(root);
+        }else{
+            
+        }
     }
 
     @FXML

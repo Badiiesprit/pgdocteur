@@ -2,8 +2,9 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -64,13 +65,13 @@
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
-                              <String fx:value="btn-selrcted" />
                            </styleClass>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#forum" prefWidth="140.0" text="Forum" GridPane.rowIndex="7">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="img_prof" />
+                              <String fx:value="btn-selrcted" />
                            </styleClass>
                         </Button>
                         <Button fx:id="btn_rdv" mnemonicParsing="false" onAction="#rensezvous" prefWidth="140.0" text="prendre rendez-vous" GridPane.rowIndex="8">
@@ -106,39 +107,19 @@
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="598.0" prefWidth="654.0">
                <children>
-                  <GridPane layoutX="52.0" layoutY="75.0" prefHeight="449.0" prefWidth="532.0">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="258.0" minWidth="10.0" prefWidth="90.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="447.0" minWidth="10.0" prefWidth="442.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="38.0" minHeight="2.0" prefHeight="38.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="228.0" minHeight="0.0" prefHeight="211.0" valignment="TOP" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="121.0" minHeight="0.0" prefHeight="50.0" valignment="CENTER" />
-                     </rowConstraints>
-                     <children>
-                        <Label text="description" GridPane.rowIndex="6" />
-                        <Label text="date_deb" GridPane.rowIndex="1" />
-                        <Label text="date_fin" GridPane.rowIndex="2" />
-                        <Label text="nb participant" GridPane.rowIndex="3" />
-                        <Label text="specialite" GridPane.rowIndex="4" />
-                        <Label text="gouvernerat" GridPane.rowIndex="5" />
-                        <Button mnemonicParsing="false" onAction="#participer" prefHeight="25.0" prefWidth="408.0" styleClass="btn" text="participer" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label text="Event" />
-                        <Label fx:id="name" text="Label" GridPane.columnIndex="1" />
-                        <Label fx:id="desc" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <Label fx:id="date_d" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="date_f" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="participant" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="specialite" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Label fx:id="gouvernerat" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                     </children>
-                  </GridPane>
+                  <Text layoutX="272.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reponse">
+                     <font>
+                        <Font name="Comic Sans MS Bold Italic" size="24.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="newPost" layoutX="557.0" layoutY="18.0" mnemonicParsing="false" onAction="#NouveauButtonPushed" styleClass="btn" text="Nouveau" />
+                  <TableView fx:id="questions" layoutY="79.0" prefHeight="521.0" prefWidth="635.0">
+                     <columns>
+                        <TableColumn fx:id="idQuestion" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="mQuestion" prefWidth="466.0" text="Questions" />
+                        <TableColumn fx:id="btnReponse" prefWidth="93.0" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </items>
