@@ -17,7 +17,7 @@ public class SendEmail {
 
     public static void Send(String toEmail,String Subject,String Body) {
         final String fromEmail = "badii.abdelkhalak@esprit.tn"; //badii.abdelkhalak@esprit.tn requires valid gmail id
-        final String password = "211SMT7823"; // correct password for gmail id
+        final String password = "****"; // correct password for gmail id
 
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
